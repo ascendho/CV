@@ -1,0 +1,1 @@
+A script to automatically update CV stats using GitHub API.
