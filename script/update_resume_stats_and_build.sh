@@ -14,7 +14,7 @@ elif [[ "${1:-}" == "--build-only" ]]; then
 fi
 
 USERNAME="${1:-your-username}"
-TEX_FILE="${2:-../cv/CV.tex}"
+TEX_FILE="${2:-../template/CV.tex}"
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then

@@ -26,7 +26,7 @@ Build the template first to generate your own preview:
 ## Directory Structure / 目录结构
 
 ```
-cv/               Resume template
+template/          Resume template
   CV.tex          Main LaTeX source
 script/           Build scripts
   update_resume_stats_and_build.sh   Linux/macOS
@@ -36,7 +36,7 @@ script/           Build scripts
 ## Quick Start / 快速开始
 
 1. **Clone** this repository
-2. **Edit** `cv/CV.tex` — replace all `【...】` placeholders with your information
+2. **Edit** `template/CV.tex` — replace the example content with your own information
 3. **Run** the build script:
 
 ```bash
@@ -47,7 +47,7 @@ script/           Build scripts
 .\script\build_resume.ps1 -Username your-github-username
 ```
 
-4. **Find your PDFs** in the `cv/` directory:
+4. **Find your PDFs** in the `template/` directory:
    - `CV.pdf` — full version (Chinese name, phone number)
    - `resume.pdf` — public/anonymized version (English name only, no phone)
 
@@ -57,7 +57,7 @@ The template supports a compile-time toggle for generating an anonymized public 
 
 | | Full (`CV.pdf`) | Public (`resume.pdf`) |
 |---|---|---|
-| Name | Chinese name (你的姓名) | English name (Your Name) |
+| Name | Chinese name (张三) | English name (Zhang San) |
 | Phone | Visible | Hidden |
 
 The toggle is controlled by defining `\PUBLICRESUME` at compile time. The build scripts generate both versions automatically — no manual configuration needed.
@@ -77,7 +77,7 @@ Both scripts support three modes:
 ./script/update_resume_stats_and_build.sh --build-only
 ```
 
-The second argument optionally specifies the `.tex` file path (defaults to `../cv/CV.tex`).
+The second argument optionally specifies the `.tex` file path (defaults to `../template/CV.tex`).
 
 ## Custom Commands Reference / 自定义命令参考
 

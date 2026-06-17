@@ -2,7 +2,7 @@ param(
   [ValidateSet("full", "update-only", "build-only")]
   [string]$Mode = "full",
   [string]$Username = "your-username",
-  [string]$TexFile = "..\cv\CV.tex",
+  [string]$TexFile = "..\template\CV.tex",
   [switch]$ShowCleanupWarnings
 )
 
