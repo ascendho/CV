@@ -90,14 +90,14 @@
 % ===== 顶部信息 =====
 \vspace*{-1.52cm}
 \begin{center}
-  {\zihao{2}\bfseries Ascend Ho}\\[0.4em]
+  {\zihao{2}\bfseries 张三}\\[0.4em]
   {\fontsize{11.8pt}{12.3pt}\selectfont
   \faGlobe\ \ghlink{https://ascendho.netlify.app/}{{\fontsize{10.2pt}{10.7pt}\selectfont 个人主页}}
   \enspace \enspace
   \faGithub\ \ghlink{https://github.com/ascendho}{ascendho}
-  \enspace \ghstats{541}{1.3k}
+  \enspace \ghstats{0}{0}
   \enspace \enspace
-  \faEnvelope\ \href{mailto:ascendho@outlook.com}{ascendho@outlook.com}
+  \faEnvelope\ \href{mailto:ascendho@example.com}{ascendho@example.com}
   \enspace \enspace
   \faPhone\ +86\ 138\ 0000\ 0000}
 \end{center}
@@ -122,29 +122,29 @@
 \projentry{DistFlow 分布式任务调度与流处理引擎}{}{https://github.com/ascendho/DistFlow}{https://ascendho.netlify.app/projects/distflow/demo}
 \begin{itemize}
   \item \textbf{技术栈：}Go、gRPC、etcd、Kafka、Redis、Docker
-  \item \textbf{项目介绍：}面向大规模数据处理场景的分布式任务调度系统，重点解决节点负载不均、任务失败级联和状态一致性等问题。系统采用\projkeywordzh{主从架构}，Master 节点基于 etcd 实现服务发现与选举，通过\projkeywordzh{一致性哈希}将任务路由至 Worker 节点。每个 Worker 内部维护\projkeywordzh{三级优先级队列}（实时、批处理、延迟），结合\projkeywordzh{背压机制}动态调控消费速率，避免下游服务过载。任务执行过程中，系统通过 \projkeyword{Checkpoint} 机制定期快照中间状态，在节点故障时实现秒级恢复。此外，基于 Kafka 构建的\projkeywordzh{事件溯源}日志确保所有任务状态变更可审计、可回放。
+  \item \textbf{项目介绍：}面向大规模数据处理场景的分布式任务调度系统，重点解决节点负载不均、任务失败级联和状态一致性等问题。系统采用\projkeywordzh{主从架构}，Master 节点基于 etcd 实现服务发现与选举，通过\projkeywordzh{一致性哈希}将任务路由至 Worker 节点。每个 Worker 内部维护\projkeywordzh{三级优先级队列}（实时、批处理、延迟），结合\projkeywordzh{背压机制}动态调控消费速率，避免下游服务过载。任务执行过程中，系统通过 \projkeyword{Checkpoint} 机制定期快照中间状态，在节点故障时实现秒级恢复。此外，基于 Kafka 构建的\projkeywordzh{事件溯源}日志确保所有任务状态变更可审计、可回放。系统还提供 Web 控制台用于任务提交、进度监控和历史回溯，支持定时调度与依赖编排。
   \item \textbf{实验评估：}在 5 节点集群、10000 个模拟任务的压测中，系统吞吐量达到 \projmetric{3200 tasks/s}，P99 调度延迟控制在 \projmetric{48ms} 以内。相比单机串行方案，任务完成时间缩短 \projmetric{72\%}；节点故障恢复时间中位数为 \projmetric{2.3s}，任务丢失率为 \projmetric{0\%}。
 \end{itemize}
 
 \projentry{PanoSeg 全景视频实时语义分割管线}{}{https://github.com/ascendho/PanoSeg}{https://ascendho.netlify.app/projects/panoseg/demo}
 \begin{itemize}
   \item \textbf{技术栈：}Python、PyTorch、ONNX Runtime、Triton Inference Server、OpenCV、CUDA
-  \item \textbf{项目介绍：}聚焦全景视频在高分辨率下推理延迟过高、边缘设备资源受限等问题，构建端到端的实时语义分割管线。前端采用\projkeywordzh{自适应分辨率缩放}策略，根据场景复杂度动态调整输入尺寸，在精度与速度之间取得平衡。模型侧基于 \projkeyword{MobileNetV3} 骨干网络设计轻量分割头，并通过 ONNX 导出 + TensorRT 量化将模型体积压缩至 \projmetric{4.2MB}，推理延迟降低 \projmetric{58\%}。部署层使用 Triton Inference Server 实现\projkeywordzh{动态批处理}与\projkeywordzh{模型热更新}，支持多版本模型并行服务。后端还实现了\projkeywordzh{时序一致性后处理}，利用相邻帧的语义连续性平滑预测结果，消除闪烁伪影。
+  \item \textbf{项目介绍：}聚焦全景视频在高分辨率下推理延迟过高、边缘设备资源受限等问题，构建端到端的实时语义分割管线。前端采用\projkeywordzh{自适应分辨率缩放}策略，根据场景复杂度动态调整输入尺寸，在精度与速度之间取得平衡。模型侧基于 \projkeyword{MobileNetV3} 骨干网络设计轻量分割头，并通过 ONNX 导出 + TensorRT 量化将模型体积压缩至 \projmetric{4.2MB}，推理延迟降低 \projmetric{58\%}。部署层使用 Triton Inference Server 实现\projkeywordzh{动态批处理}与\projkeywordzh{模型热更新}，支持多版本模型并行服务与 A/B 测试。后端还实现了\projkeywordzh{时序一致性后处理}，利用相邻帧的语义连续性平滑预测结果，消除闪烁伪影，并通过 CUDA 流并行进一步压缩后处理开销。
   \item \textbf{实验评估：}在 Cityscapes 全景子集上，模型 mIoU 达到 \projmetric{72.8\%}，端到端推理延迟为 \projmetric{18.7ms/frame}（RTX 3060），满足 50 FPS 实时处理需求。相比基线模型，FLOPs 减少 \projmetric{64\%}，内存占用降低 \projmetric{47\%}，在 Jetson Nano 边缘设备上仍可稳定运行。
 \end{itemize}
 
 \projentry{KnowGraph 领域知识图谱构建与智能问答平台}{}{https://github.com/ascendho/KnowGraph}{}
 \begin{itemize}
   \item \textbf{技术栈：}Python、FastAPI、Neo4j、spaCy、Hugging Face Transformers、React
-  \item \textbf{项目介绍：}针对垂直领域知识分散、检索效率低下的问题，设计并实现了一套从非结构化文本到可交互知识图谱的完整流水线。抽取阶段，通过\projkeywordzh{实体识别}（NER）与\projkeywordzh{关系抽取}（RE）联合模型从文档中提取三元组，并结合\projkeywordzh{共指消解}与\projkeywordzh{实体对齐}对抽取结果进行去重与融合。图谱构建阶段，将三元组写入 Neo4j 并建立全文索引，支持 Cypher 模板化查询与自然语言查询的双通道检索。前端基于 React 实现\projkeywordzh{力导向图}可视化，支持节点展开、路径高亮和子图导出。问答模块通过 \projkeyword{Text-to-Cypher} 将用户自然语言问题翻译为图查询语句，从图谱中检索答案并附带推理路径。
+  \item \textbf{项目介绍：}针对垂直领域知识分散、检索效率低下的问题，设计并实现了一套从非结构化文本到可交互知识图谱的完整流水线。抽取阶段，通过\projkeywordzh{实体识别}（NER）与\projkeywordzh{关系抽取}（RE）联合模型从文档中提取三元组，并结合\projkeywordzh{共指消解}与\projkeywordzh{实体对齐}对抽取结果进行去重与融合，有效解决了同一实体的多名称指代问题。图谱构建阶段，将三元组写入 Neo4j 并建立全文索引，支持 Cypher 模板化查询与自然语言查询的双通道检索。前端基于 React 实现\projkeywordzh{力导向图}可视化，支持节点展开、路径高亮和子图导出。问答模块通过 \projkeyword{Text-to-Cypher} 将用户自然语言问题翻译为图查询语句，从图谱中检索答案并附带推理路径，支持多跳推理与聚合统计类查询。
   \item \textbf{实验评估：}在 200 篇领域论文构建的知识图谱上，实体抽取 F1 达到 \projmetric{85.3\%}，关系抽取 F1 达到 \projmetric{78.6\%}。问答模块在 50 道测试题上准确率为 \projmetric{82\%}，平均查询响应时间为 \projmetric{340ms}，相比纯文本检索方案，答案召回率提升 \projmetric{31\%}。
 \end{itemize}
 
 % ===== 科研成果 =====
 \section{科研成果}
 \begin{itemize}
-  \item \textbf{SCI 二区在投，学生一作：}物联网异常检测框架研究
-  \item \textbf{IEEE 某国际会议，第二作者：}跨设备数据安全验证方法研究
+  \item \textbf{SCI 二区在投，学生一作：}基于因果推理的物联网异常检测框架研究
+  \item \textbf{IEEE 某国际会议，第二作者：}跨设备数据安全验证方法研究\paperlink{https://doi.org/10.1109/example.2025.00001}
   \item \textbf{一项发明专利}已受理；\textbf{一项软件著作权}已登记
 \end{itemize}
 
@@ -152,7 +152,7 @@
 \section{奖项与证书}
 \begin{itemize}
   \item \textbf{MOOC 认证：}自主学习大模型应用开发最新技术，并在 Coursera、Udemy、Harvard 等平台取得\ghlink{https://ascendho.netlify.app/\#certificates}{多项课程证书}
-  \item \textbf{竞赛：}某省级创新大赛（2025）\textbf{铜奖}
+  \item \textbf{竞赛：}某省级大学生创新大赛（2025）\textbf{铜奖}（项目名称-项目简短描述）
   \item \textbf{奖学金：}2024、2025学年研究生三等学业奖学金；本科期间获院级二等、三等奖学金各一次
 \end{itemize}
 
