@@ -111,30 +111,33 @@
 % ===== 专业技能 =====
 \section{专业技能}
 \begin{itemize}
-  \item 熟练掌握 Python，具备 FastAPI、LangChain、LangGraph 等框架的开发经验，能够独立设计并实现后端服务与 RESTful API
-  \item 深入理解 LLM Agent 架构与 RAG 检索增强生成技术，具备使用向量数据库（Qdrant、Redis）构建高效检索系统的实操经验
-  \item 熟悉模型对齐与微调流水线，了解 SFT、LoRA 及 GRPO 强化学习算法，具备基于 Predibase 等平台的模型训练经验
-  \item \textbf{英语能力：}CET-6 \textbf{520} 分，能够流畅阅读英文技术文档和论文，具备英文工作环境下的沟通能力
+  \item 理解向量嵌入的底层原理，具备使用 Qdrant、Redis 等主流向量数据库构建高效检索系统的实操经验
+  \item 深入理解 LLM Agent 架构与 RAG 检索技术，具备使用 LangChain 与 LangGraph 构建复杂的 Agent 工作流的经验
+  \item 熟悉模型对齐微调流水线，了解 SFT 与 LoRA 技术，具备基于 GRPO 强化学习算法优化模型推理能力的实战经验
+  \item \textbf{英语能力：}CET-4 \textbf{512} 分，CET-6 \textbf{540} 分，2024 年考研英语二 \textbf{85} 分，具备适应英文工作环境的能力
 \end{itemize}
 
 % ===== 项目经历 =====
 \section{项目经历}
-\projentry{语义缓存增强的智能客服系统}{}{https://github.com/zhangsan/smart-cache}{https://zhangsan.dev/projects/smart-cache/demo}
+\projentry{E-Snap 两级缓存与语义增强的智能电商客服}{}{https://github.com/zhangsan/E-Snap}{https://zhangsan.dev/projects/e-snap/demo}
 \begin{itemize}
-  \item \textbf{技术栈：}Python、FastAPI、LangGraph、LangChain、Redis
-  \item \textbf{项目介绍：}面向电商客服场景的语义缓存增强系统，采用\projkeywordzh{混合检索}（向量召回 + 关键词匹配）与\projkeywordzh{两级缓存}架构：L1 通过规则匹配优先复用历史答案，L2 通过语义相似度召回候选；对于不确定的候选，由 \projkeyword{LLM Validator} 判断复用或回退到完整 RAG 流程。在 30 条评测请求上，缓存覆盖率达到 \projmetric{42.3\%}，端到端延迟降低 \projmetric{26.6\%}，费用节省 \projmetric{32.4\%}。
+  \item \textbf{技术栈：} Python、FastAPI、LangGraph、LangChain、RedisVL / Redis Stack
+  \item \textbf{项目介绍：}面向电商客服场景的语义缓存增强系统，重点解决高频问题重复检索、动态问题误答风险等问题。系统启动时先对高频 FAQ 进行预加载缓存，知识检索侧采用向量召回与关键词检索结合的\projkeywordzh{混合检索机制}。请求进入后，先对时间、库存、具体商品型号等动态查询进行前置拦截，避免不适合静态复用的问题进入缓存。随后进入\projkeywordzh{两级缓存}：L1 通过归一化、编辑距离和子问题命中等规则优先复用历史答案，L2 通过\projkeywordzh{语义缓存}召回相似问答；对于存在候选但不能直接复用的问题，再由 \projkeyword{LLM Validator} 判断是直接复用、补充缺失信息，还是回退到完整 RAG。只有在缓存无法覆盖或复用收益不足时，系统才进入 \projkeyword{ReAct} 式检索完成知识查询和答案生成，并将结果按规则写回缓存。
+  \item \textbf{实验评估：}在 30 条离线评测请求上，系统前置拦截 4 条动态类查询，缓存覆盖率达到 42.31\%，其中直接缓存复用率为 30.77\%，使端到端延迟降低了 \projmetric{26.64\%}，系统吞吐量提升至原来的 \projmetric{1.36} 倍；成本方面，相对纯 RAG 基线，平均每次请求减少 1.14 次 LLM 调用，累计净节省约 25 次调用，费用总体节省 \projmetric{32.36\%}。
 \end{itemize}
 
-\projentry{多模态文档视觉检索与问答系统}{}{https://github.com/zhangsan/vision-doc}{https://zhangsan.dev/projects/vision-doc/demo}
+\projentry{VisionDoc 视觉检索驱动的多模态页证智答系统}{}{https://github.com/zhangsan/VisionDoc}{https://zhangsan.dev/projects/visiondoc/demo}
 \begin{itemize}
-  \item \textbf{技术栈：}Python、FastAPI、ColPali、Qdrant、pdf2image、Docker
-  \item \textbf{项目介绍：}聚焦图文混排、复杂版式文档的检索需求，构建多模态页级证据检索与问答系统。上传阶段将 PDF、PPTX 统一转为页面图像，使用 ColPali 生成多向量视觉特征并写入 Qdrant 建立索引。查询阶段通过\projkeywordzh{复合问题拆分}与\projkeywordzh{多轮对话上下文改写}，结合 \projkeyword{MUVERA Prefetch + ColPali MaxSim} 两阶段精排，实现高精度页面定位。在 20 题测评中，Hit Rate@3 达到 \projmetric{90\%}，MRR 达到 \projmetric{0.77}。
+  \item \textbf{技术栈：}Python、FastAPI、ColPali、MUVERA、Qdrant、pdf2image / Poppler、Pillow、Docker
+  \item \textbf{项目介绍：}聚焦传统 OCR 流程难以稳定处理的图文混排、复杂版式、表格截图与页面结构信息丢失等问题，构建多模态页级证据检索与问答系统。系统在上传阶段先将 PDF、PPTX 与图片统一转换为页面图像，随后使用 ColPali 为每一页生成多向量视觉特征，再使用 MUVERA 生成压缩召回向量，并将两类向量一并写入 Qdrant 建立视觉索引。查询阶段，后端先进行无关问题过滤，再进行\projkeywordzh{复合问题拆分}与\projkeywordzh{多轮对话上下文改写}，接着通过 \projkeyword{MUVERA Prefetch + ColPali MaxSim} 精排执行两阶段视觉检索。若高置信证据量不足，则补入 near-threshold 页面并在必要时回退到 top-1 候选页，最后通过豆包多模态模型生成答案，返回带文档名、页码和页面截图溯源的结果。
+  \item \textbf{实验评估：}在包含 3 份真实文档的 20 题测评中，双路检索机制展现出显著的设计优势：相比单路（muvera\_only）基线，该架构在平均检索延迟仅微增约 28ms（至 444.3ms）的情况下，将 Hit Rate@3 由 25\% 大幅跃升至 \projmetric{90\%}，MRR 由 0.25 提升至 \projmetric{0.7667}，并实现了 \projmetric{1.00} 的 Faithfulness，表明系统能够以极低的时间开销换取极其稳健的定位精度。
 \end{itemize}
 
-\projentry{基于 SFT + GRPO 的推理能力两阶段微调}{}{https://github.com/zhangsan/reasoning-finetune}{}
+\projentry{基于 SFT+GRPO 的 Wordle 反馈驱动两阶段微调}{}{https://github.com/zhangsan/Wordle}{}
 \begin{itemize}
   \item \textbf{技术栈：}Python、Predibase、LoRA、SFT、GRPO
-  \item \textbf{项目介绍：}围绕结构化推理任务，基于 \textit{Qwen 2.5 7B Instruct} 搭建两阶段微调流水线：先通过 SFT 对齐结构化输出格式与基础推理能力，再通过 GRPO 引入\projkeywordzh{格式校验}、\projkeywordzh{历史一致性}、\projkeywordzh{信息增益}三类奖励函数强化策略学习。在 10 局基准测试中取得 \projmetric{7/10} 通关率，表现\projkeywordzh{超过} \textit{GPT-4o-mini}（1/10），\projkeywordzh{逼近} \textit{Claude 3.5 Sonnet}（8/10）。
+  \item \textbf{项目介绍：}针对通用模型在结构化输出不稳定、历史反馈利用不足和多轮搜索策略薄弱的问题，围绕 Wordle（一种猜词游戏）搭建基于 \textit{Qwen 2.5 7B Instruct} 与 Predibase 的两阶段微调流水线。首先通过 SFT 对齐 think 和 guess 双段结构化输出与基础规则推理能力，再通过 GRPO 引入\projkeywordzh{格式校验}、\projkeywordzh{历史反馈一致性}、\projkeywordzh{信息增益}三类奖励函数，强化模型对反馈的利用和候选空间压缩能力，并构建真实对局 Benchmark 用于评估模型表现。
+  \item \textbf{实验评估：}在 10 局随机基准测试、单局最多 6 次猜测的设定下，相较基础 \textit{Qwen 2.5 7B Instruct}（0/10 通关）和单 GRPO 方案（3/10 通关，4.0/6 步），SFT + GRPO 联合训练方案取得 \projmetric{7/10} 通关、获胜局平均 \projmetric{4.0/6} 步的优异成绩，表现\projkeywordzh{超过}闭源大模型\textit{GPT-4o-mini}（1/10 通关，4.0/6 步），并\projkeywordzh{逼近} \textit{Claude 3.5 Sonnet}（8/10 通关，3.9/6 步），验证了小参数模型在垂直领域推理任务上的强化学习增益。
 \end{itemize}
 
 % ===== 科研成果 =====
@@ -148,9 +151,9 @@
 % ===== 证书 =====
 \section{奖项与证书}
 \begin{itemize}
-  \item \textbf{MOOC 认证：}在 Coursera、Udemy 等平台取得多项深度学习与 LLM 应用开发课程证书
+  \item \textbf{MOOC 认证：}自主学习大模型应用开发最新技术，并在 Coursera、Udemy、Harvard 等平台取得\ghlink{https://zhangsan.dev/\#certificates}{多项课程证书}
   \item \textbf{竞赛：}某省级创新大赛（2025）\textbf{铜奖}
-  \item \textbf{奖学金：}研究生学业奖学金；本科期间获院级奖学金两次
+  \item \textbf{奖学金：}2024、2025学年研究生三等学业奖学金；本科期间获院级二等、三等奖学金各一次
 \end{itemize}
 
 \end{document}
