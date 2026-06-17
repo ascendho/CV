@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-USERNAME="${1:-your-username}"
+USERNAME="${1:-ascendho}"
 TEX_FILE="${2:-../template/CV.tex}"
 
 require_cmd() {

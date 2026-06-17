@@ -1,5 +1,5 @@
 param(
-  [string]$Username = "your-username",
+  [string]$Username = "ascendho",
   [string]$TexFile = "..\template\CV.tex"
 )
 

@@ -92,12 +92,12 @@
 \begin{center}
   {\zihao{2}\bfseries 张三}\\[0.4em]
   {\fontsize{11.8pt}{12.3pt}\selectfont
-  \faGlobe\ \ghlink{https://zhangsan.dev/}{{\fontsize{10.2pt}{10.7pt}\selectfont 个人主页}}
+  \faGlobe\ \ghlink{https://ascendho.netlify.app/}{{\fontsize{10.2pt}{10.7pt}\selectfont 个人主页}}
   \enspace \enspace
-  \faGithub\ \ghlink{https://github.com/zhangsan}{zhangsan}
+  \faGithub\ \ghlink{https://github.com/ascendho}{ascendho}
   \enspace \ghstats{0}{0}
   \enspace \enspace
-  \faEnvelope\ \href{mailto:zhangsan@example.com}{zhangsan@example.com}
+  \faEnvelope\ \href{mailto:ascendho@example.com}{ascendho@example.com}
   \enspace \enspace
   \faPhone\ +86\ 138\ 0000\ 0000}
 \end{center}
@@ -119,21 +119,21 @@
 
 % ===== 项目经历 =====
 \section{项目经历}
-\projentry{E-Snap 两级缓存与语义增强的智能电商客服}{}{https://github.com/zhangsan/E-Snap}{https://zhangsan.dev/projects/e-snap/demo}
+\projentry{E-Snap 两级缓存与语义增强的智能电商客服}{}{https://github.com/ascendho/E-Snap}{https://ascendho.netlify.app/projects/e-snap/demo}
 \begin{itemize}
   \item \textbf{技术栈：} Python、FastAPI、LangGraph、LangChain、RedisVL / Redis Stack
   \item \textbf{项目介绍：}面向电商客服场景的语义缓存增强系统，重点解决高频问题重复检索、动态问题误答风险等问题。系统启动时先对高频 FAQ 进行预加载缓存，知识检索侧采用向量召回与关键词检索结合的\projkeywordzh{混合检索机制}。请求进入后，先对时间、库存、具体商品型号等动态查询进行前置拦截，避免不适合静态复用的问题进入缓存。随后进入\projkeywordzh{两级缓存}：L1 通过归一化、编辑距离和子问题命中等规则优先复用历史答案，L2 通过\projkeywordzh{语义缓存}召回相似问答；对于存在候选但不能直接复用的问题，再由 \projkeyword{LLM Validator} 判断是直接复用、补充缺失信息，还是回退到完整 RAG。只有在缓存无法覆盖或复用收益不足时，系统才进入 \projkeyword{ReAct} 式检索完成知识查询和答案生成，并将结果按规则写回缓存。
   \item \textbf{实验评估：}在 30 条离线评测请求上，系统前置拦截 4 条动态类查询，缓存覆盖率达到 42.31\%，其中直接缓存复用率为 30.77\%，使端到端延迟降低了 \projmetric{26.64\%}，系统吞吐量提升至原来的 \projmetric{1.36} 倍；成本方面，相对纯 RAG 基线，平均每次请求减少 1.14 次 LLM 调用，累计净节省约 25 次调用，费用总体节省 \projmetric{32.36\%}。
 \end{itemize}
 
-\projentry{VisionDoc 视觉检索驱动的多模态页证智答系统}{}{https://github.com/zhangsan/VisionDoc}{https://zhangsan.dev/projects/visiondoc/demo}
+\projentry{VisionDoc 视觉检索驱动的多模态页证智答系统}{}{https://github.com/ascendho/VisionDoc}{https://ascendho.netlify.app/projects/visiondoc/demo}
 \begin{itemize}
   \item \textbf{技术栈：}Python、FastAPI、ColPali、MUVERA、Qdrant、pdf2image / Poppler、Pillow、Docker
   \item \textbf{项目介绍：}聚焦传统 OCR 流程难以稳定处理的图文混排、复杂版式、表格截图与页面结构信息丢失等问题，构建多模态页级证据检索与问答系统。系统在上传阶段先将 PDF、PPTX 与图片统一转换为页面图像，随后使用 ColPali 为每一页生成多向量视觉特征，再使用 MUVERA 生成压缩召回向量，并将两类向量一并写入 Qdrant 建立视觉索引。查询阶段，后端先进行无关问题过滤，再进行\projkeywordzh{复合问题拆分}与\projkeywordzh{多轮对话上下文改写}，接着通过 \projkeyword{MUVERA Prefetch + ColPali MaxSim} 精排执行两阶段视觉检索。若高置信证据量不足，则补入 near-threshold 页面并在必要时回退到 top-1 候选页，最后通过豆包多模态模型生成答案，返回带文档名、页码和页面截图溯源的结果。
   \item \textbf{实验评估：}在包含 3 份真实文档的 20 题测评中，双路检索机制展现出显著的设计优势：相比单路（muvera\_only）基线，该架构在平均检索延迟仅微增约 28ms（至 444.3ms）的情况下，将 Hit Rate@3 由 25\% 大幅跃升至 \projmetric{90\%}，MRR 由 0.25 提升至 \projmetric{0.7667}，并实现了 \projmetric{1.00} 的 Faithfulness，表明系统能够以极低的时间开销换取极其稳健的定位精度。
 \end{itemize}
 
-\projentry{基于 SFT+GRPO 的 Wordle 反馈驱动两阶段微调}{}{https://github.com/zhangsan/Wordle}{}
+\projentry{基于 SFT+GRPO 的 Wordle 反馈驱动两阶段微调}{}{https://github.com/ascendho/Wordle}{}
 \begin{itemize}
   \item \textbf{技术栈：}Python、Predibase、LoRA、SFT、GRPO
   \item \textbf{项目介绍：}针对通用模型在结构化输出不稳定、历史反馈利用不足和多轮搜索策略薄弱的问题，围绕 Wordle（一种猜词游戏）搭建基于 \textit{Qwen 2.5 7B Instruct} 与 Predibase 的两阶段微调流水线。首先通过 SFT 对齐 think 和 guess 双段结构化输出与基础规则推理能力，再通过 GRPO 引入\projkeywordzh{格式校验}、\projkeywordzh{历史反馈一致性}、\projkeywordzh{信息增益}三类奖励函数，强化模型对反馈的利用和候选空间压缩能力，并构建真实对局 Benchmark 用于评估模型表现。
@@ -143,15 +143,15 @@
 % ===== 科研成果 =====
 \section{科研成果}
 \begin{itemize}
-  \item \textbf{SCI 二区在投，学生一作：}基于因果推理的物联网异常检测框架研究
-  \item \textbf{IEEE 某国际会议，第二作者：}跨设备数据安全验证方法研究\paperlink{https://doi.org/10.1109/example.2025.00001}
+  \item \textbf{SCI 二区在投，学生一作：}物联网异常检测框架研究
+  \item \textbf{IEEE 某国际会议，第二作者：}跨设备数据安全验证方法研究
   \item \textbf{一项发明专利}已受理；\textbf{一项软件著作权}已登记
 \end{itemize}
 
 % ===== 证书 =====
 \section{奖项与证书}
 \begin{itemize}
-  \item \textbf{MOOC 认证：}自主学习大模型应用开发最新技术，并在 Coursera、Udemy、Harvard 等平台取得\ghlink{https://zhangsan.dev/\#certificates}{多项课程证书}
+  \item \textbf{MOOC 认证：}自主学习大模型应用开发最新技术，并在 Coursera、Udemy、Harvard 等平台取得\ghlink{https://ascendho.netlify.app/\#certificates}{多项课程证书}
   \item \textbf{竞赛：}某省级创新大赛（2025）\textbf{铜奖}
   \item \textbf{奖学金：}2024、2025学年研究生三等学业奖学金；本科期间获院级二等、三等奖学金各一次
 \end{itemize}
