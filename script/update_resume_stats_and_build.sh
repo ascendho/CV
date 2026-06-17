@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# 运行：./update_CV_stats_and_build.sh
+# 运行：./update_resume_stats_and_build.sh [github-username] [tex-file]
 set -euo pipefail
+
+cd "$(dirname "$0")"
 
 MODE="full"
 if [[ "${1:-}" == "--update-only" ]]; then
@@ -11,8 +13,8 @@ elif [[ "${1:-}" == "--build-only" ]]; then
   shift
 fi
 
-USERNAME="${1:-ascendho}"
-TEX_FILE="${2:-CV.tex}"
+USERNAME="${1:-your-username}"
+TEX_FILE="${2:-../cv/CV.tex}"
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -47,6 +49,8 @@ if [[ ! -f "$TEX_FILE" ]]; then
   echo "Error: '$TEX_FILE' not found" >&2
   exit 1
 fi
+
+TEX_DIR=$(dirname "$TEX_FILE")
 
 if [[ "$MODE" != "build-only" ]]; then
   echo "[1/4] Fetching GitHub stars for @$USERNAME ..."
@@ -98,17 +102,19 @@ fi
 
 echo "[4/5] Building full PDF (CV.pdf) ..."
 full_jobname="CV"
-xelatex -interaction=nonstopmode -halt-on-error -jobname="$full_jobname" "$TEX_FILE" >/dev/null
+xelatex -interaction=nonstopmode -halt-on-error -jobname="$full_jobname" -output-directory="$TEX_DIR" "$TEX_FILE" >/dev/null
+xelatex -interaction=nonstopmode -halt-on-error -jobname="$full_jobname" -output-directory="$TEX_DIR" "$TEX_FILE" >/dev/null
 
 echo "[5/5] Building public (anonymized) PDF (resume.pdf) ..."
 public_jobname="resume"
-xelatex -interaction=nonstopmode -halt-on-error -jobname="$public_jobname" "\def\PUBLICRESUME{1}\input{$TEX_FILE}" >/dev/null
+xelatex -interaction=nonstopmode -halt-on-error -jobname="$public_jobname" -output-directory="$TEX_DIR" "\def\PUBLICRESUME{1}\input{$TEX_FILE}" >/dev/null
+xelatex -interaction=nonstopmode -halt-on-error -jobname="$public_jobname" -output-directory="$TEX_DIR" "\def\PUBLICRESUME{1}\input{$TEX_FILE}" >/dev/null
 
 # xelatex 会生成编译辅助文件，构建后统一清理，仅保留 PDF。
 rm -f \
-  "${full_jobname}.aux" "${full_jobname}.log" "${full_jobname}.out" "${full_jobname}.synctex.gz" \
-  "${public_jobname}.aux" "${public_jobname}.log" "${public_jobname}.out" "${public_jobname}.synctex.gz"
+  "${TEX_DIR}/${full_jobname}.aux" "${TEX_DIR}/${full_jobname}.log" "${TEX_DIR}/${full_jobname}.out" "${TEX_DIR}/${full_jobname}.synctex.gz" \
+  "${TEX_DIR}/${public_jobname}.aux" "${TEX_DIR}/${public_jobname}.log" "${TEX_DIR}/${public_jobname}.out" "${TEX_DIR}/${public_jobname}.synctex.gz"
 
 echo "Done. Updated $TEX_FILE and generated:"
-echo "  - ${full_jobname}.pdf"
-echo "  - ${public_jobname}.pdf"
+echo "  - ${TEX_DIR}/${full_jobname}.pdf"
+echo "  - ${TEX_DIR}/${public_jobname}.pdf"
