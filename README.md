@@ -1,6 +1,8 @@
 # LaTeX 简历模板
 
-<img src="assets/CV-1.png" alt="简历预览" width="600" />
+<div align="center">
+  <img src="assets/CV-1.png" alt="简历预览" width="600" />
+</div>
 
 面向国内技术从业者的现代简洁 LaTeX 简历模板。基于 XeLaTeX + ctexart，提供项目经历、教育背景、科研成果等自定义命令，支持 GitHub 数据自动获取。
 
