@@ -69,14 +69,6 @@
 \newcommand{\projkeywordzh}[1]{\textcolor{KeywordGrayZh}{#1}}
 \newcommand{\projmetric}[1]{\textcolor{SectionBlue}{#1}}
 
-% 匿名公开版开关：命令行定义 \PUBLICRESUME 时启用
-\newif\ifpublicresume
-\ifdefined\PUBLICRESUME
-  \publicresumetrue
-\else
-  \publicresumefalse
-\fi
-
 % 教育条目：学校左对齐，专业/学历状态居中，时间右对齐
 \newcommand{\eduentry}[4]{%
   \makebox[0.40\textwidth][l]{\textbf{#1}}%
@@ -98,7 +90,7 @@
 % ===== 顶部信息 =====
 \vspace*{-1.52cm}
 \begin{center}
-  {\zihao{2}\bfseries \ifpublicresume Zhang San\else 张三\fi}\\[0.4em]
+  {\zihao{2}\bfseries 张三}\\[0.4em]
   {\fontsize{11.8pt}{12.3pt}\selectfont
   \faGlobe\ \ghlink{https://zhangsan.dev/}{{\fontsize{10.2pt}{10.7pt}\selectfont 个人主页}}
   \enspace \enspace
@@ -106,11 +98,8 @@
   \enspace \ghstats{0}{0}
   \enspace \enspace
   \faEnvelope\ \href{mailto:zhangsan@example.com}{zhangsan@example.com}
-  \ifpublicresume
-  \else
-    \enspace \enspace
-    \faPhone\ +86\ 138\ 0000\ 0000
-  \fi}
+  \enspace \enspace
+  \faPhone\ +86\ 138\ 0000\ 0000}
 \end{center}
 \vspace*{-0.48em}
 
@@ -122,9 +111,10 @@
 % ===== 专业技能 =====
 \section{专业技能}
 \begin{itemize}
-  \item 熟悉 Python 及 FastAPI、LangChain 等框架，具备后端服务开发与 API 设计经验
-  \item 深入理解 LLM Agent 架构与 RAG 检索技术，具备使用 LangGraph 构建复杂 Agent 工作流的经验
-  \item \textbf{英语能力：}CET-6 \textbf{520} 分，能够流畅阅读英文技术文档和论文
+  \item 熟练掌握 Python，具备 FastAPI、LangChain、LangGraph 等框架的开发经验，能够独立设计并实现后端服务与 RESTful API
+  \item 深入理解 LLM Agent 架构与 RAG 检索增强生成技术，具备使用向量数据库（Qdrant、Redis）构建高效检索系统的实操经验
+  \item 熟悉模型对齐与微调流水线，了解 SFT、LoRA 及 GRPO 强化学习算法，具备基于 Predibase 等平台的模型训练经验
+  \item \textbf{英语能力：}CET-6 \textbf{520} 分，能够流畅阅读英文技术文档和论文，具备英文工作环境下的沟通能力
 \end{itemize}
 
 % ===== 项目经历 =====
@@ -133,6 +123,12 @@
 \begin{itemize}
   \item \textbf{技术栈：}Python、FastAPI、LangGraph、LangChain、Redis
   \item \textbf{项目介绍：}面向电商客服场景的语义缓存增强系统，采用\projkeywordzh{混合检索}（向量召回 + 关键词匹配）与\projkeywordzh{两级缓存}架构：L1 通过规则匹配优先复用历史答案，L2 通过语义相似度召回候选；对于不确定的候选，由 \projkeyword{LLM Validator} 判断复用或回退到完整 RAG 流程。在 30 条评测请求上，缓存覆盖率达到 \projmetric{42.3\%}，端到端延迟降低 \projmetric{26.6\%}，费用节省 \projmetric{32.4\%}。
+\end{itemize}
+
+\projentry{多模态文档视觉检索与问答系统}{}{https://github.com/zhangsan/vision-doc}{https://zhangsan.dev/projects/vision-doc/demo}
+\begin{itemize}
+  \item \textbf{技术栈：}Python、FastAPI、ColPali、Qdrant、pdf2image、Docker
+  \item \textbf{项目介绍：}聚焦图文混排、复杂版式文档的检索需求，构建多模态页级证据检索与问答系统。上传阶段将 PDF、PPTX 统一转为页面图像，使用 ColPali 生成多向量视觉特征并写入 Qdrant 建立索引。查询阶段通过\projkeywordzh{复合问题拆分}与\projkeywordzh{多轮对话上下文改写}，结合 \projkeyword{MUVERA Prefetch + ColPali MaxSim} 两阶段精排，实现高精度页面定位。在 20 题测评中，Hit Rate@3 达到 \projmetric{90\%}，MRR 达到 \projmetric{0.77}。
 \end{itemize}
 
 \projentry{基于 SFT + GRPO 的推理能力两阶段微调}{}{https://github.com/zhangsan/reasoning-finetune}{}
@@ -144,8 +140,8 @@
 % ===== 科研成果 =====
 \section{科研成果}
 \begin{itemize}
-  \item \textbf{SCI 二区在投，学生一作：}基于因果推理的异常检测框架研究
-  \item \textbf{IEEE 某会议，第二作者：}跨设备数据安全验证方法研究\paperlink{https://doi.org/10.1109/example.2025.00001}
+  \item \textbf{SCI 二区在投，学生一作：}基于因果推理的物联网异常检测框架研究
+  \item \textbf{IEEE 某国际会议，第二作者：}跨设备数据安全验证方法研究\paperlink{https://doi.org/10.1109/example.2025.00001}
   \item \textbf{一项发明专利}已受理；\textbf{一项软件著作权}已登记
 \end{itemize}
 
