@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# 用法：./update_github_stats.sh [github-username] [tex-file]
-# 从 GitHub API 获取指定用户的 star 和 commit 总数，更新 LaTeX 文件中的 \ghstats{}{}。
+# 用法：./update_github_stats.sh [github-username]
+# 从 GitHub API 获取 star 和 commit 总数，更新 ../template/CV.tex 中的 \ghstats{}{}。
+# 如果不指定用户名，脚本会自动从 CV.tex 中的 \ghlink 命令提取。
 set -euo pipefail
 
 cd "$(dirname "$0")"
 
-USERNAME="${1:-ascendho}"
-TEX_FILE="${2:-../template/CV.tex}"
+TEX_FILE="../template/CV.tex"
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -37,6 +37,18 @@ require_cmd perl
 if [[ ! -f "$TEX_FILE" ]]; then
   echo "Error: '$TEX_FILE' not found" >&2
   exit 1
+fi
+
+# 如果没有传用户名，从 tex 文件中自动提取
+if [[ -z "${1:-}" ]]; then
+  USERNAME=$(perl -ne 'print $1 if /\\ghlink\{https:\/\/github\.com\/([^}]+)\}/' "$TEX_FILE")
+  if [[ -z "$USERNAME" ]]; then
+    echo "Error: could not detect GitHub username from '$TEX_FILE'. Please pass it as an argument." >&2
+    exit 1
+  fi
+  echo "Detected GitHub username from tex file: @$USERNAME"
+else
+  USERNAME="$1"
 fi
 
 echo "[1/3] Fetching GitHub stars for @$USERNAME ..."

@@ -1,10 +1,11 @@
 param(
-  [string]$Username = "ascendho",
-  [string]$TexFile = "..\template\CV.tex"
+  [string]$Username = ""
 )
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
+
+$TexFile = "..\template\CV.tex"
 
 function Require-Command {
   param([Parameter(Mandatory = $true)][string]$Name)
@@ -27,6 +28,17 @@ function Short-Count {
 
 if (-not (Test-Path -LiteralPath $TexFile)) {
   throw "Error: '$TexFile' not found"
+}
+
+# 如果没有传用户名，从 tex 文件中自动提取
+if (-not $Username) {
+  $content = Get-Content -LiteralPath $TexFile -Raw -Encoding UTF8
+  if ($content -match '\\ghlink\{https://github\.com/([^}]+)\}') {
+    $Username = $Matches[1]
+    Write-Host "Detected GitHub username from tex file: @$Username"
+  } else {
+    throw "Error: could not detect GitHub username from '$TexFile'. Please pass -Username."
+  }
 }
 
 Write-Host "[1/3] Fetching GitHub stars for @$Username ..."
