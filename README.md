@@ -1,10 +1,18 @@
 # LaTeX 简历模板
 
 <div align="center">
+
+![LaTeX](https://img.shields.io/badge/LaTeX-XeLaTeX-blue?logo=latex)
+![License](https://img.shields.io/badge/license-MIT-green)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
+</div>
+
+<div align="center">
   <img src="assets/CV-1.png" alt="简历预览" width="600" />
 </div>
 
-面向国内技术从业者的现代简洁 LaTeX 简历模板。基于 XeLaTeX + ctexart，提供项目经历、教育背景、科研成果等自定义命令，支持 GitHub 统计数据自动获取。
+面向国内技术从业者的现代简洁 LaTeX 简历模板。基于 XeLaTeX + ctexart，提供项目经历、教育背景、科研成果等自定义命令，支持 GitHub star 与 commit 统计数据自动获取。
 
 ## 环境要求
 
@@ -50,3 +58,27 @@ xelatex CV.tex   # 运行两次以确保版式正确
 ```
 
 编译生成的 `CV.pdf` 位于 `template/` 目录下。
+
+## GitHub 数据脚本
+
+脚本从 GitHub API 获取你的 star 总数和 commit 总数，并更新 `CV.tex` 中的 `\ghstats{stars}{commits}` 命令。
+
+```bash
+# 默认更新 ../template/CV.tex
+./script/update_github_stats.sh 你的用户名
+
+# 指定其他 .tex 文件
+./script/update_github_stats.sh 你的用户名 path/to/your.tex
+```
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+- 如果你有功能建议或发现了 bug，请提交 [Issue](https://github.com/ascendho/CV/issues)
+- 如果你想贡献代码，请先 Fork 本仓库，修改后提交 PR
+- 请确保 PR 描述清晰，说明修改的内容和原因
+
+## 许可证
+
+本项目使用 [MIT License](LICENSE)。
