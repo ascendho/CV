@@ -39,13 +39,17 @@ script/           辅助脚本
 
 1. **克隆**本仓库
 2. **编辑** `template/CV.tex`，将示例内容替换为你自己的信息
-3. **更新 GitHub 数据**（可选）：
+3. **更新 GitHub 数据**（可选）：脚本会自动从 `CV.tex` 中检测你的 GitHub 用户名，也可以手动指定。
 
 ```bash
-# Linux/macOS
+# Linux/macOS — 自动检测用户名
+./script/update_github_stats.sh
+# 或手动指定
 ./script/update_github_stats.sh 你的GitHub用户名
 
 # Windows (PowerShell)
+.\script\update_github_stats.ps1
+# 或手动指定
 .\script\update_github_stats.ps1 -Username 你的GitHub用户名
 ```
 
@@ -58,18 +62,6 @@ xelatex CV.tex   # 运行两次以确保版式正确
 ```
 
 编译生成的 `CV.pdf` 位于 `template/` 目录下。
-
-## GitHub 数据脚本
-
-脚本从 GitHub API 获取你的 star 总数和 commit 总数，并更新 `CV.tex` 中的 `\ghstats{stars}{commits}` 命令。
-
-```bash
-# 默认更新 ../template/CV.tex
-./script/update_github_stats.sh 你的用户名
-
-# 指定其他 .tex 文件
-./script/update_github_stats.sh 你的用户名 path/to/your.tex
-```
 
 ## 贡献
 
