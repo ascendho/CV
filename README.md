@@ -33,6 +33,9 @@ template/         简历模版
 script/           辅助脚本
   update_github_stats.sh    Linux/macOS
   update_github_stats.ps1   Windows (PowerShell)
+assets/           静态资源
+  CV-1.png        简历预览图
+LICENSE           MIT 许可证
 ```
 
 ## 快速开始
