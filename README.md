@@ -41,6 +41,8 @@ script/           辅助脚本
 2. **编辑** `template/CV.tex`，将示例内容替换为你自己的信息
 3. **更新 GitHub 数据**（可选）：脚本会自动从 `CV.tex` 中检测你的 GitHub 用户名，也可以手动指定。
 
+> **注意：** 脚本需要访问 GitHub API。如果你在国内遇到 `Failed to connect to api.github.com` 等网络错误，可以使用 [Watt Toolkit](https://steampp.net/)（原 Steam++）等工具加速 GitHub 访问。
+
 ```bash
 # Linux/macOS — 自动检测用户名
 ./script/update_github_stats.sh
