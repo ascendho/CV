@@ -1,6 +1,10 @@
 # LaTeX 简历模板
 
 <div align="center">
+  <img src="assets/cv-cover-zh-cn.png" alt="LaTeX 简历模板中文封面" width="100%" />
+</div>
+
+<div align="center">
 
 ![LaTeX](https://img.shields.io/badge/LaTeX-XeLaTeX-blue?logo=latex)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -8,11 +12,13 @@
 
 </div>
 
-<div align="center">
-  <img src="assets/CV-1.png" alt="简历预览" width="600" />
-</div>
+面向国内技术从业者的现代简洁 LaTeX 简历模板。项目基于 XeLaTeX 与 ctexart，提供教育背景、项目经历、科研成果等可复用模块，并支持自动获取 GitHub Star 与 Commit 统计数据。
 
-面向国内技术从业者的现代简洁 LaTeX 简历模板。基于 XeLaTeX + ctexart，提供项目经历、教育背景、科研成果等自定义命令，支持 GitHub star 与 commit 统计数据自动获取。
+## 简历预览
+
+<div align="center">
+  <img src="assets/CV-template.png" alt="简历预览" width="600" />
+</div>
 
 ## 环境要求
 
@@ -28,13 +34,14 @@
 ## 目录结构
 
 ```
-template/         简历模版
+template/         简历模板
   CV.tex          主 LaTeX 源文件
 script/           辅助脚本
   update_github_stats.sh    Linux/macOS
   update_github_stats.ps1   Windows (PowerShell)
 assets/           静态资源
-  CV-1.png        简历预览图
+  CV-template.png           简历预览图
+  cv-cover-zh-cn.png        README 中文封面
 LICENSE           MIT 许可证
 ```
 
