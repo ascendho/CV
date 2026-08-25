@@ -73,8 +73,10 @@ echo "GITHUB_TOKEN=你的Token" >> .env
 ```
 
 <details>
-<summary>如何生成 GitHub Token（点击展开）</summary>
-GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
+<summary>如何生成 GitHub Token</summary>
+
+路径：GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
+
 </details>
 
 4. **编译** PDF：
