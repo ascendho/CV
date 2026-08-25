@@ -63,18 +63,23 @@ python script\update_github_stats.py
 > 脚本需要访问 GitHub API。如果你在国内遇到 `无法连接 api.github.com` 等网络错误，可以使用 [Watt Toolkit](https://steampp.net/)（原 Steam++）等工具加速 GitHub 访问。
 
 **提示：** GitHub API 匿名访问限额较低（约 10 次/分钟）。如果遇到限流报错，可以在仓库根目录创建 `.env` 文件配置 Token 提升限额（约 30 次/分钟）：
->
-> ```bash
-> # 1. 复制模板并填入你的 Token（生成地址见下，无需勾选任何权限）
-> cp .env.example .env
-> echo "GITHUB_TOKEN=你的Token" >> .env
->
-> # 2. 正常运行脚本即可，脚本会自动读取 .env
-> ```
->
-> Token 生成：GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
->
-> `.env` 已被 `.gitignore` 排除，不会被提交。也可以不建文件、临时用环境变量（`export GITHUB_TOKEN=xxx` / `$env:GITHUB_TOKEN = "xxx"`），环境变量优先级更高。注意 Token 等同于密码，不要提交进仓库或分享给他人。
+
+```bash
+# 1. 复制模板并填入你的 Token（生成地址见下方折叠说明，无需勾选任何权限）
+cp .env.example .env
+echo "GITHUB_TOKEN=你的Token" >> .env
+
+# 2. 正常运行脚本即可，脚本会自动读取 .env
+```
+
+<details>
+<summary>如何生成 GitHub Token（点击展开）</summary>
+
+GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
+
+`.env` 已被 `.gitignore` 排除，不会被提交。也可以不建文件、临时用环境变量（`export GITHUB_TOKEN=xxx` / `$env:GITHUB_TOKEN = "xxx"`），环境变量优先级更高。注意 Token 等同于密码，不要提交进仓库或分享给他人。
+
+</details>
 
 4. **编译** PDF：
 
