@@ -75,7 +75,8 @@ echo "GITHUB_TOKEN=你的Token" >> .env
 <details>
 <summary>如何生成 GitHub Token</summary>
 
-路径：GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
+- 官方文档：[Managing your personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+- 生成地址：[github.com/settings/tokens](https://github.com/settings/tokens) → Generate new token（无需勾选任何权限）
 
 </details>
 
