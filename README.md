@@ -74,11 +74,7 @@ echo "GITHUB_TOKEN=你的Token" >> .env
 
 <details>
 <summary>如何生成 GitHub Token（点击展开）</summary>
-
 GitHub → Settings → Developer settings → [Personal access tokens](https://github.com/settings/tokens) → Generate new token。
-
-`.env` 已被 `.gitignore` 排除，不会被提交。也可以不建文件、临时用环境变量（`export GITHUB_TOKEN=xxx` / `$env:GITHUB_TOKEN = "xxx"`），环境变量优先级更高。注意 Token 等同于密码，不要提交进仓库或分享给他人。
-
 </details>
 
 4. **编译** PDF：
