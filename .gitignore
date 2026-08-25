@@ -3,3 +3,16 @@
 *.log
 *.out
 *.synctex.gz
+
+# 本地密钥（参考 .env.example）
+.env
+
+# 未在 README 中引用的生成素材
+assets/cv-cover.json
+assets/cv-cover.png
+assets/cv-logo-lockup.png
+assets/cv-logo-mark.png
+assets/cv-promo.png
+assets/cv-promo-zh-cn.png
+assets/cv-social-preview.png
+assets/cv-social-preview-zh-cn.png
